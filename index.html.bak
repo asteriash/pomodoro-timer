@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/css/style.css" ref="stylesheet" type="text/css">
+    <script src="./assets/js/index.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="viewport">
+        <!-- Make sure that the site looks neat, stretch the vp over the screen-->
+        <div class="modes">
+            <!-- we put work modes here!! -->
+            <button class="work" onClick="changeMode('work')">Work</button>
+            <button class="shortBreak" onClick="changeMode('shortBreak')">Short Break</button>
+            <button class="longBreak" onClick="changeMode('longBreak')">Long break</button>
+        </div>
+    </div>
+</body>
+</html>
