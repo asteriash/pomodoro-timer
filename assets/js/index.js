@@ -1,40 +1,21 @@
-let timerActive = false; //Flag to simply check if there's a timer already running
-// No point running two, right?
-let modes = { //modes are defined in seconds here
-  work: 25*60,
-  shortBreak: 5*60,
-  longBreak: 15*60
-};s.
-
-
-const changeMode = (mode) => {
-  if(timerActive == true){
-    console.error("There's a timer already running! Aborting!!");
-    return;
-  };
-  if(!(mode in modes)){
-    console.error(`Unable to find mode: ${mode}`);
-    return;
-  };
-  console.log(`Currently set: ${mode}`);
-  setTimer(modes[mode]);
+let modes = {
+  work: 25,
+  shortBreak: 5,
+  longBreak: 15,
 }
 
-const setTimer = (duration) => {
-  console.log(`Duration has been set to: ${duration}`);
-  let currentTime = Math.floor(Date.now() / 1000);
-  console.log(`Setting the current time to ${currentTime}`);
-  let expectedTime = currentTime + duration / 1000;
-  console.log(`Expected time for this to end: ${expectedTime}`);
-  let failsafeFunction = () => {
-  if(currentTime < expectedTime){
-    currentTime++;
-    console.log(`Current time: ${currentTime}`);
-  }
-  else{
-    console.log("The timer should have ended by now, stopping...");
-    return;
-  }
-    setInterval(failsafeFunction, 1000);
-  }
-}// This is pretty much the failsafe, if at any point 
+//Simply making a countdown, we'll introduce user interraction later.
+
+function setTimer (mode){
+  let duration = modes[mode] * 60; // Converting the interval to seconds...
+  console.log(`Timer set for: ${duration} at ${mode}`); // Log for debugging
+  let timerID = setInterval(() => { // We're setting the interval value to timerID so we can suspend and clear it
+    if(duration >= 0){
+      duration--;
+      console.log(`Time left: ${duration} seconds.`);
+    }
+    else{
+      clearInterval(timerID); // If the timer has already finished, just clear the interval, freeing the worker.
+    }
+  }, 1000)
+}
